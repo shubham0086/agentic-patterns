@@ -1,0 +1,50 @@
+# memory/reality/pipeline.yaml
+# Source of truth for the starter pipeline.
+# Update this file when you change agent connections or APIs.
+# Every claim has a verify command — run it to confirm the claim is still true.
+
+subsystem: pipeline
+last_updated: 2026-05-23
+status: operational
+
+working:
+  dag_execution:
+    reality: "DAGRunner runs agents in topological order. Planner → Researcher."
+    confidence: 1.0
+    verify: "node -e \"const {DAGRunner}=require('./src/core/DAGRunner'); console.log('ok')\""
+
+  blackboard_state:
+    reality: "Agents append notes via blackboard.appendNote(). Never mutate state directly."
+    confidence: 1.0
+    verify: "grep -r 'appendNote' src/agents/"
+
+  provider_routing:
+    reality: "BaseAgent tries providers in PROVIDER_ORDER env var. Ollama needs no key."
+    confidence: 1.0
+    verify: "node -e \"require('dotenv').config(); console.log(process.env.PROVIDER_ORDER || 'ollama')\""
+
+  cost_guard:
+    reality: "Blackboard.recordCost() throws if totalCost > BUDGET_USD."
+    confidence: 1.0
+    verify: "grep -n 'budget_exceeded' src/core/Blackboard.js"
+
+not_wired:
+  solution_memory:
+    status: not_implemented
+    planned: "Phase 2 — add SQLite-backed solution recall"
+    blocker: "none — needs sqlite3 dependency"
+
+  parallel_execution:
+    status: not_implemented
+    planned: "Phase 2 — DAGRunner can detect independent nodes and Promise.all them"
+    blocker: "requires thread-safe Blackboard write guards"
+
+  sse_streaming:
+    status: not_implemented
+    planned: "Phase 3 — Express server with SSE endpoint streaming blackboard events"
+    blocker: "none"
+
+  recovery_supervisor:
+    status: not_implemented
+    planned: "Phase 3 — background loop per Part H of TEMPLATE.md"
+    blocker: "none"

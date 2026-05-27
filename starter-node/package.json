@@ -1,0 +1,18 @@
+{
+  "name": "agentic-patterns-starter",
+  "version": "1.0.0",
+  "description": "Minimal working multi-agent system starter — Node.js implementation of agentic-patterns",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node index.js --goal \"research and summarize the latest trends in AI agents\""
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "js-yaml": "^4.1.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "license": "MIT"
+}
