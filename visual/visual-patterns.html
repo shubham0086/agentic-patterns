@@ -1,0 +1,579 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agentic Patterns · Constellation Map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ── Reset & base ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  background: #0c0f19;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Agentic Patterns · Constellation Map ── */
+
+.ap-constellation {
+  --ap-blue: #3b82f6;
+  --ap-violet: #8b5cf6;
+  --ap-teal: #14b8a6;
+  --ap-bg: #0c0f19;
+  --ap-glass: rgba(255,255,255,0.04);
+  --ap-glass-border: rgba(255,255,255,0.08);
+  position: relative;
+  width: 100%;
+  max-width: 680px;
+  aspect-ratio: 1 / 0.92;
+  margin: 0 auto;
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  overflow: visible;
+}
+
+/* ─── SVG connection layer ─── */
+.ap-svg-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.ap-line {
+  stroke: url(#ap-line-grad);
+  stroke-width: 1;
+  opacity: 0.3;
+}
+
+.ap-dot {
+  fill: var(--ap-teal);
+  filter: drop-shadow(0 0 4px var(--ap-teal));
+}
+
+/* staggered travel along each edge */
+.ap-dot-0  { animation: ap-travel 4.0s linear infinite 0.0s; }
+.ap-dot-1  { animation: ap-travel 4.4s linear infinite 0.4s; }
+.ap-dot-2  { animation: ap-travel 3.8s linear infinite 0.8s; }
+.ap-dot-3  { animation: ap-travel 4.6s linear infinite 1.2s; }
+.ap-dot-4  { animation: ap-travel 4.2s linear infinite 1.6s; }
+.ap-dot-5  { animation: ap-travel 3.6s linear infinite 2.0s; }
+.ap-dot-6  { animation: ap-travel 4.8s linear infinite 2.4s; }
+.ap-dot-7  { animation: ap-travel 4.0s linear infinite 2.8s; }
+.ap-dot-8  { animation: ap-travel 3.9s linear infinite 3.2s; }
+.ap-dot-9  { animation: ap-travel 4.3s linear infinite 3.6s; }
+
+@keyframes ap-travel {
+  0%   { offset-distance: 0%; opacity: 0; }
+  5%   { opacity: 1; }
+  95%  { opacity: 1; }
+  100% { offset-distance: 100%; opacity: 0; }
+}
+
+/* ─── Center hub ─── */
+.ap-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  text-align: center;
+}
+
+.ap-center-glow {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: radial-gradient(circle, hsla(250,80%,65%,0.25) 0%, transparent 70%);
+  animation: ap-pulse 3s ease-in-out infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.ap-center-glow::before {
+  content: '';
+  position: absolute;
+  inset: 15px;
+  border-radius: 50%;
+  background: radial-gradient(circle, hsla(220,85%,62%,0.35) 0%, transparent 70%);
+  animation: ap-pulse 3s ease-in-out infinite 1.5s;
+}
+
+.ap-center-icon {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* CSS-only book / playbook icon */
+.ap-center-icon-book {
+  width: 28px;
+  height: 32px;
+  border: 2px solid var(--ap-violet);
+  border-radius: 2px 6px 6px 2px;
+  position: relative;
+  box-shadow: 0 0 12px hsla(258,70%,60%,0.4);
+}
+.ap-center-icon-book::before {
+  content: '';
+  position: absolute;
+  left: -4px;
+  top: 2px;
+  bottom: 2px;
+  width: 4px;
+  background: var(--ap-violet);
+  border-radius: 2px 0 0 2px;
+}
+.ap-center-icon-book::after {
+  content: '';
+  position: absolute;
+  top: 7px; left: 5px; right: 5px;
+  height: 2px;
+  background: rgba(255,255,255,0.3);
+  box-shadow: 0 6px 0 rgba(255,255,255,0.2), 0 12px 0 rgba(255,255,255,0.15);
+}
+
+.ap-center-label {
+  margin-top: 8px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  white-space: nowrap;
+}
+
+@keyframes ap-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.7; }
+  50%      { transform: scale(1.25); opacity: 1; }
+}
+
+/* ─── Nodes ─── */
+.ap-node {
+  position: absolute;
+  z-index: 10;
+  transform: translate(-50%, -50%);
+  width: 120px;
+  text-align: center;
+  animation: ap-float 6s ease-in-out infinite;
+}
+
+.ap-node:nth-child(4) { animation-delay: -1.2s; }
+.ap-node:nth-child(5) { animation-delay: -2.4s; }
+.ap-node:nth-child(6) { animation-delay: -3.6s; }
+.ap-node:nth-child(7) { animation-delay: -4.8s; }
+
+@keyframes ap-float {
+  0%, 100% { transform: translate(-50%, -50%) translateY(0); }
+  50%      { transform: translate(-50%, -50%) translateY(-5px); }
+}
+
+.ap-card {
+  background: var(--ap-glass);
+  border: 1px solid var(--ap-glass-border);
+  border-radius: 14px;
+  padding: 18px 10px 14px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition: border-color 0.35s, box-shadow 0.35s;
+}
+
+.ap-card:hover {
+  border-color: rgba(255,255,255,0.18);
+  box-shadow: 0 0 24px rgba(139,92,246,0.18);
+}
+
+.ap-node-icon {
+  width: 36px;
+  height: 36px;
+  margin: 0 auto 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ap-node-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #f1f5f9;
+  line-height: 1.3;
+}
+
+.ap-node-sub {
+  font-size: 0.58rem;
+  color: rgba(255,255,255,0.4);
+  margin-top: 3px;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.03em;
+}
+
+/* ─── Pentagon positions (% based) ─── */
+.ap-n1 { top: 5%;  left: 50%; }
+.ap-n2 { top: 32%; left: 93%; }
+.ap-n3 { top: 78%; left: 78%; }
+.ap-n4 { top: 78%; left: 22%; }
+.ap-n5 { top: 32%; left: 7%; }
+
+/* ─── CSS-only Icons ─── */
+
+/* 1 · Task Ordering : stacked bars */
+.ap-icon-order {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-start;
+}
+.ap-icon-order span {
+  height: 4px;
+  border-radius: 2px;
+  background: var(--ap-blue);
+  box-shadow: 0 0 8px hsla(217,91%,60%,0.5);
+}
+.ap-icon-order span:nth-child(1) { width: 22px; }
+.ap-icon-order span:nth-child(2) { width: 16px; opacity: 0.75; }
+.ap-icon-order span:nth-child(3) { width: 28px; opacity: 0.55; }
+
+/* 2 · Smart Routing : forked path */
+.ap-icon-route {
+  position: relative;
+  width: 30px;
+  height: 28px;
+}
+.ap-icon-route::before {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 0;
+  width: 3px;
+  height: 14px;
+  background: var(--ap-teal);
+  border-radius: 2px;
+  box-shadow: 0 0 8px hsla(168,76%,37%,0.5);
+}
+.ap-icon-route::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 13px;
+  width: 28px;
+  height: 14px;
+  border: 2px solid var(--ap-teal);
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 0 8px hsla(168,76%,37%,0.3);
+}
+
+/* 3 · Noise Control : wave dampening */
+.ap-icon-noise {
+  position: relative;
+  width: 32px;
+  height: 24px;
+  overflow: hidden;
+}
+.ap-icon-noise::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 6px 12px at 4px 12px, transparent 60%, hsla(258,70%,60%,0.8) 61%, transparent 62%),
+    radial-gradient(ellipse 6px 8px  at 12px 12px, transparent 60%, hsla(258,70%,60%,0.55) 61%, transparent 62%),
+    radial-gradient(ellipse 6px 5px  at 20px 12px, transparent 60%, hsla(258,70%,60%,0.35) 61%, transparent 62%),
+    radial-gradient(ellipse 6px 3px  at 28px 12px, transparent 60%, hsla(258,70%,60%,0.2) 61%, transparent 62%);
+  filter: drop-shadow(0 0 4px hsla(258,70%,60%,0.4));
+}
+.ap-icon-noise::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 2px;
+  background: var(--ap-violet);
+  border-radius: 1px;
+  box-shadow: 0 0 6px var(--ap-violet);
+}
+
+/* 4 · Security Gates : shield */
+.ap-icon-shield {
+  width: 24px;
+  height: 28px;
+  border: 2.5px solid var(--ap-blue);
+  border-radius: 3px 3px 12px 12px;
+  position: relative;
+  box-shadow: 0 0 10px hsla(217,91%,60%,0.4);
+}
+.ap-icon-shield::after {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 8px;
+  border: 2px solid rgba(255,255,255,0.35);
+  border-radius: 50%;
+}
+
+/* 5 · Budget Guard : coin/gauge */
+.ap-icon-budget {
+  width: 26px;
+  height: 26px;
+  border: 2.5px solid var(--ap-teal);
+  border-radius: 50%;
+  position: relative;
+  box-shadow: 0 0 10px hsla(168,76%,37%,0.4);
+}
+.ap-icon-budget::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2px;
+  height: 10px;
+  background: var(--ap-teal);
+  transform-origin: bottom center;
+  transform: translate(-50%, -100%) rotate(-35deg);
+  border-radius: 1px;
+}
+.ap-icon-budget::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 2px;
+  background: var(--ap-teal);
+  border-radius: 1px;
+  opacity: 0.5;
+}
+
+/* ─── Outer ring ─── */
+.ap-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 88%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.03);
+  z-index: 0;
+  animation: ap-ring-rotate 60s linear infinite;
+}
+
+.ap-ring::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  background: var(--ap-teal);
+  border-radius: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 0 10px var(--ap-teal);
+  opacity: 0.5;
+}
+
+@keyframes ap-ring-rotate {
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* ─── Ambient background particles ─── */
+.ap-ambient {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.ap-ambient span {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: rgba(139,92,246,0.3);
+  border-radius: 50%;
+  animation: ap-twinkle 4s ease-in-out infinite;
+}
+.ap-ambient span:nth-child(1) { top:12%; left:18%; animation-delay: 0s; }
+.ap-ambient span:nth-child(2) { top:25%; left:72%; animation-delay: 0.8s; }
+.ap-ambient span:nth-child(3) { top:68%; left:14%; animation-delay: 1.6s; }
+.ap-ambient span:nth-child(4) { top:82%; left:58%; animation-delay: 2.4s; }
+.ap-ambient span:nth-child(5) { top:45%; left:88%; animation-delay: 3.2s; }
+.ap-ambient span:nth-child(6) { top:55%; left:35%; animation-delay: 0.4s; }
+.ap-ambient span:nth-child(7) { top:15%; left:45%; animation-delay: 1.2s; }
+.ap-ambient span:nth-child(8) { top:90%; left:30%; animation-delay: 2.0s; }
+
+@keyframes ap-twinkle {
+  0%, 100% { opacity: 0; transform: scale(1); }
+  50%      { opacity: 1; transform: scale(1.8); }
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 600px) {
+  .ap-constellation { max-width: 360px; }
+  .ap-node { width: 96px; }
+  .ap-card { padding: 12px 8px 10px; border-radius: 10px; }
+  .ap-node-label { font-size: 0.62rem; }
+  .ap-node-sub { font-size: 0.5rem; }
+  .ap-center-glow { width: 80px; height: 80px; }
+  .ap-center-label { font-size: 0.58rem; }
+  .ap-node-icon { width: 28px; height: 28px; }
+}
+</style>
+</head>
+<body>
+
+<div class="ap-constellation">
+
+  <!-- Ambient background particles -->
+  <div class="ap-ambient">
+    <span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span>
+  </div>
+
+  <!-- Subtle outer ring -->
+  <div class="ap-ring"></div>
+
+  <!-- SVG connection lines + traveling dots -->
+  <svg class="ap-svg-layer" viewBox="0 0 680 626" preserveAspectRatio="xMidYMid meet">
+    <defs>
+      <linearGradient id="ap-line-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%"   stop-color="#3b82f6" stop-opacity="0.6"/>
+        <stop offset="50%"  stop-color="#8b5cf6" stop-opacity="0.5"/>
+        <stop offset="100%" stop-color="#14b8a6" stop-opacity="0.6"/>
+      </linearGradient>
+    </defs>
+
+    <!-- Pentagon edges: all 10 pairs -->
+    <line class="ap-line" x1="340" y1="31"  x2="632" y2="200"/>
+    <line class="ap-line" x1="340" y1="31"  x2="530" y2="488"/>
+    <line class="ap-line" x1="340" y1="31"  x2="150" y2="488"/>
+    <line class="ap-line" x1="340" y1="31"  x2="48"  y2="200"/>
+    <line class="ap-line" x1="632" y1="200" x2="530" y2="488"/>
+    <line class="ap-line" x1="632" y1="200" x2="150" y2="488"/>
+    <line class="ap-line" x1="632" y1="200" x2="48"  y2="200"/>
+    <line class="ap-line" x1="530" y1="488" x2="150" y2="488"/>
+    <line class="ap-line" x1="530" y1="488" x2="48"  y2="200"/>
+    <line class="ap-line" x1="150" y1="488" x2="48"  y2="200"/>
+
+    <!-- Traveling light dots -->
+    <circle r="3" class="ap-dot ap-dot-0" style="offset-path: path('M340,31 L632,200');">
+      <animate attributeName="r" values="2;3.5;2" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="3" class="ap-dot ap-dot-1" style="offset-path: path('M340,31 L530,488');">
+      <animate attributeName="r" values="2;3.5;2" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="3" class="ap-dot ap-dot-2" style="offset-path: path('M340,31 L150,488');">
+      <animate attributeName="r" values="2;3.5;2" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="3" class="ap-dot ap-dot-3" style="offset-path: path('M340,31 L48,200');">
+      <animate attributeName="r" values="2;3.5;2" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="3" class="ap-dot ap-dot-4" style="offset-path: path('M632,200 L530,488');">
+      <animate attributeName="r" values="2;3.5;2" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="3" class="ap-dot ap-dot-5" style="offset-path: path('M632,200 L150,488');">
+      <animate attributeName="r" values="2;3.5;2" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="3" class="ap-dot ap-dot-6" style="offset-path: path('M632,200 L48,200');">
+      <animate attributeName="r" values="2;3.5;2" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="3" class="ap-dot ap-dot-7" style="offset-path: path('M530,488 L150,488');">
+      <animate attributeName="r" values="2;3.5;2" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="3" class="ap-dot ap-dot-8" style="offset-path: path('M530,488 L48,200');">
+      <animate attributeName="r" values="2;3.5;2" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="3" class="ap-dot ap-dot-9" style="offset-path: path('M150,488 L48,200');">
+      <animate attributeName="r" values="2;3.5;2" dur="2s" repeatCount="indefinite"/>
+    </circle>
+  </svg>
+
+  <!-- Center hub -->
+  <div class="ap-center">
+    <div class="ap-center-glow">
+      <div class="ap-center-icon">
+        <div class="ap-center-icon-book"></div>
+      </div>
+    </div>
+    <div class="ap-center-label">Architecture Playbook</div>
+  </div>
+
+  <!-- Node 1: Task Ordering (top) -->
+  <div class="ap-node ap-n1">
+    <div class="ap-card">
+      <div class="ap-node-icon">
+        <div class="ap-icon-order">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+      <div class="ap-node-label">Task Ordering</div>
+      <div class="ap-node-sub">pattern 01</div>
+    </div>
+  </div>
+
+  <!-- Node 2: Smart Routing (upper-right) -->
+  <div class="ap-node ap-n2">
+    <div class="ap-card">
+      <div class="ap-node-icon">
+        <div class="ap-icon-route"></div>
+      </div>
+      <div class="ap-node-label">Smart Routing</div>
+      <div class="ap-node-sub">pattern 02</div>
+    </div>
+  </div>
+
+  <!-- Node 3: Noise Control (lower-right) -->
+  <div class="ap-node ap-n3">
+    <div class="ap-card">
+      <div class="ap-node-icon">
+        <div class="ap-icon-noise"></div>
+      </div>
+      <div class="ap-node-label">Noise Control</div>
+      <div class="ap-node-sub">pattern 03</div>
+    </div>
+  </div>
+
+  <!-- Node 4: Security Gates (lower-left) -->
+  <div class="ap-node ap-n4">
+    <div class="ap-card">
+      <div class="ap-node-icon">
+        <div class="ap-icon-shield"></div>
+      </div>
+      <div class="ap-node-label">Security Gates</div>
+      <div class="ap-node-sub">pattern 04</div>
+    </div>
+  </div>
+
+  <!-- Node 5: Budget Guard (upper-left) -->
+  <div class="ap-node ap-n5">
+    <div class="ap-card">
+      <div class="ap-node-icon">
+        <div class="ap-icon-budget"></div>
+      </div>
+      <div class="ap-node-label">Budget Guard</div>
+      <div class="ap-node-sub">pattern 05</div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

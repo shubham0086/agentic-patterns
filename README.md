@@ -81,7 +81,16 @@ graph LR
 
 ![Five Agentic Patterns — Architecture Reference](diagrams/agentic-patterns-flowchart.svg)
 
-> Interactive animated version: [shubham0086.github.io/projects/agentic-patterns.html](https://shubham0086.github.io/projects/agentic-patterns.html)
+**Constellation map (animated — open in browser):**
+
+The `visual/` folder contains `visual-patterns.html` — a standalone animated constellation map showing how the 5 patterns connect and reinforce each other. No dependencies, no build step. Open directly in any browser.
+
+```
+open visual/visual-patterns.html
+# or: python -m http.server 8080 → localhost:8080/visual/visual-patterns.html
+```
+
+> Full portfolio case study with live animations: [shubham0086.github.io/projects/agentic-patterns.html](https://shubham0086.github.io/projects/agentic-patterns.html)
 
 ---
 
