@@ -41,21 +41,40 @@ Start with **01** if you are designing a new pipeline. Start with **02** if you 
 **Five patterns — how they connect:**
 
 ```mermaid
-graph TD
-    A[Goal arrives] --> B[01 DAG Scheduler\nTopological sort, Kahn's algorithm\nParallel execution where safe]
-    B --> C[02 LLM Router\nCircuit breaker per provider\nBedrock → OpenAI → Ollama fallback]
-    C --> D[03 Reality-First Memory\nSQLite ground truth\nDrift detection on every write]
-    D --> E[04 GraphDB Context\nCode as graph, not flat files\nSub-token navigation]
-    E --> F[05 RAG + Idempotency Cache\nSHA-256 keyed responses\nHybrid semantic + keyword search]
-    F --> G[Output: reviewable artifact]
+graph LR
+    GOAL([Goal]) --> DAG
 
-    style A fill:#1e293b,stroke:#6366f1,color:#f8fafc
-    style B fill:#1e293b,stroke:#6366f1,color:#f8fafc
-    style C fill:#1e293b,stroke:#818cf8,color:#f8fafc
-    style D fill:#1e293b,stroke:#a855f7,color:#f8fafc
-    style E fill:#1e293b,stroke:#a855f7,color:#f8fafc
-    style F fill:#1e293b,stroke:#10b981,color:#f8fafc
-    style G fill:#0f172a,stroke:#10b981,color:#10b981
+    subgraph ORC ["01  Orchestration"]
+        DAG[DAG Scheduler\nKahn's topological sort\nparallel where safe]
+    end
+
+    subgraph REL ["02  Reliability"]
+        LLM[LLM Router\ncircuit breaker per provider\nBedrock → OpenAI → Ollama]
+    end
+
+    subgraph MEM ["03 · 04 · 05  Memory + Data"]
+        direction TB
+        REAL[Reality-First Memory\nSQLite ground truth]
+        GDB[GraphDB Context\ncode as graph, sub-token nav]
+        RAG[RAG + Idempotency Cache\nSHA-256 keyed responses]
+    end
+
+    DAG --> LLM
+    LLM --> REAL
+    LLM --> GDB
+    LLM --> RAG
+    REAL --> OUT
+    GDB  --> OUT
+    RAG  --> OUT
+    OUT([Reviewable artifact])
+
+    style GOAL fill:#0f172a,stroke:#6366f1,color:#818cf8
+    style DAG  fill:#1e293b,stroke:#6366f1,color:#f8fafc
+    style LLM  fill:#1e293b,stroke:#818cf8,color:#f8fafc
+    style REAL fill:#1e293b,stroke:#a855f7,color:#f8fafc
+    style GDB  fill:#1e293b,stroke:#a855f7,color:#f8fafc
+    style RAG  fill:#1e293b,stroke:#10b981,color:#f8fafc
+    style OUT  fill:#0f172a,stroke:#10b981,color:#10b981
 ```
 
 **Architecture reference (all 5 patterns annotated):**
