@@ -1,0 +1,164 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 960" width="100%" height="100%" style="background-color:#0c0f19; font-family:'Space Grotesk',-apple-system,sans-serif;">
+  <defs>
+    <pattern id="ap-dots" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1" fill="#1e293b" fill-opacity="0.5"/>
+    </pattern>
+    <style>
+      .ap-ind { animation:ap-i 2s ease-in-out infinite; }
+      @keyframes ap-i { 0%,100%{r:4;fill-opacity:.5;} 50%{r:6;fill-opacity:1;} }
+      .ap-flow { stroke-dasharray:6,10; animation:ap-d 2s linear infinite; }
+      @keyframes ap-d { to { stroke-dashoffset:-16; } }
+    </style>
+  </defs>
+
+  <rect width="920" height="960" fill="#0c0f19"/>
+  <rect width="920" height="960" fill="url(#ap-dots)"/>
+
+  <!-- ══════════ HEADER ══════════ -->
+  <rect x="0" y="0" width="920" height="80" fill="#0f172a"/>
+  <rect x="0" y="79" width="920" height="1" fill="#1e293b"/>
+  <rect x="0" y="0" width="4" height="80" fill="#6366f1"/>
+  <text x="32" y="36" fill="#f8fafc" font-size="18" font-weight="700" letter-spacing="-0.4">AGENTIC PATTERNS — FIVE PRODUCTION DECISIONS</text>
+  <text x="32" y="62" fill="#64748b" font-size="12">Architectural theory extracted from the live Agentic SDLC pipeline · Each pattern survived real users</text>
+  <!-- badge -->
+  <rect x="752" y="27" width="132" height="28" rx="5" fill="rgba(99,102,241,0.12)" stroke="#6366f1" stroke-width="1"/>
+  <circle cx="772" cy="41" r="4" fill="#6366f1" class="ap-ind"/>
+  <text x="828" y="46" fill="#818cf8" font-size="10.5" font-weight="600" text-anchor="middle">OPEN SOURCE</text>
+
+  <!-- ══════════ SECTION LABEL ══════════ -->
+  <text x="32" y="116" fill="#475569" font-size="10" font-weight="600" letter-spacing="2">THE FIVE PATTERNS</text>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       CARD 1 — LOOP vs DAG  (indigo)   y: 132 → 286  (154 tall)
+  ═══════════════════════════════════════════════════════════════════ -->
+  <rect x="32" y="132" width="856" height="154" rx="10" fill="#0f172a" stroke="#6366f1" stroke-width="1.6"/>
+  <rect x="32" y="132" width="6" height="154" rx="3" fill="#6366f1"/>
+  <!-- number circle -->
+  <circle cx="86" cy="178" r="22" fill="rgba(99,102,241,0.12)" stroke="#6366f1" stroke-width="1.5"/>
+  <text x="86" y="185" fill="#818cf8" font-size="20" font-weight="700" text-anchor="middle">01</text>
+  <!-- content -->
+  <text x="128" y="170" fill="#818cf8" font-size="11" font-weight="700" letter-spacing="1.5">EXECUTION TOPOLOGY</text>
+  <text x="128" y="198" fill="#f8fafc" font-size="18" font-weight="600">Loop vs DAG Execution</text>
+  <text x="128" y="228" fill="#94a3b8" font-size="13">When an agent system should be a single recursive loop versus a topologically-ordered DAG.</text>
+  <text x="128" y="252" fill="#94a3b8" font-size="13">Most production systems converge to a DAG with one or two bounded loop sub-graphs.</text>
+  <!-- decision tag -->
+  <rect x="128" y="262" width="290" height="14" rx="0" fill="none"/>
+  <text x="128" y="274" fill="#6366f1" font-size="11.5" font-weight="600">→ Decision: DAG core, bounded loops at the edges</text>
+  <!-- mini visual right side -->
+  <g transform="translate(720, 150)">
+    <rect x="0" y="0" width="140" height="118" rx="8" fill="#0a0e1a" stroke="#1e293b" stroke-width="1"/>
+    <text x="70" y="22" fill="#475569" font-size="9" text-anchor="middle" font-weight="600">DAG + LOOP</text>
+    <!-- dag nodes -->
+    <circle cx="40" cy="48" r="9" fill="#0f172a" stroke="#6366f1" stroke-width="1.5"/>
+    <circle cx="100" cy="48" r="9" fill="#0f172a" stroke="#6366f1" stroke-width="1.5"/>
+    <circle cx="70" cy="88" r="9" fill="#0f172a" stroke="#818cf8" stroke-width="1.5"/>
+    <path d="M40 57 L66 81" stroke="#6366f1" stroke-width="1.5" class="ap-flow"/>
+    <path d="M100 57 L74 81" stroke="#6366f1" stroke-width="1.5" class="ap-flow"/>
+    <!-- loop arc -->
+    <path d="M61 88 A 14 14 0 1 1 79 88" fill="none" stroke="#475569" stroke-width="1.3" stroke-dasharray="3,3"/>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       CARD 2 — FAILOVER ROUTING  (teal)   y: 302 → 456
+  ═══════════════════════════════════════════════════════════════════ -->
+  <rect x="32" y="302" width="856" height="154" rx="10" fill="#0f172a" stroke="#14b8a6" stroke-width="1.6"/>
+  <rect x="32" y="302" width="6" height="154" rx="3" fill="#14b8a6"/>
+  <circle cx="86" cy="348" r="22" fill="rgba(20,184,166,0.12)" stroke="#14b8a6" stroke-width="1.5"/>
+  <text x="86" y="355" fill="#2dd4bf" font-size="20" font-weight="700" text-anchor="middle">02</text>
+  <text x="128" y="340" fill="#2dd4bf" font-size="11" font-weight="700" letter-spacing="1.5">RESILIENCE</text>
+  <text x="128" y="368" fill="#f8fafc" font-size="18" font-weight="600">Multi-Provider Failover Routing</text>
+  <text x="128" y="398" fill="#94a3b8" font-size="13">Routing LLM traffic across Anthropic, OpenAI, and a local Ollama fallback.</text>
+  <text x="128" y="422" fill="#94a3b8" font-size="13">Circuit-breaker placement, retry budgets, and which signals justify re-routing vs retry.</text>
+  <text x="128" y="444" fill="#14b8a6" font-size="11.5" font-weight="600">→ Decision: Circuit breaker per provider + capped retry budget</text>
+  <!-- mini visual -->
+  <g transform="translate(720, 320)">
+    <rect x="0" y="0" width="140" height="118" rx="8" fill="#0a0e1a" stroke="#1e293b" stroke-width="1"/>
+    <text x="70" y="22" fill="#475569" font-size="9" text-anchor="middle" font-weight="600">FAILOVER CHAIN</text>
+    <rect x="20" y="34" width="100" height="20" rx="4" fill="#0f172a" stroke="#14b8a6" stroke-width="1.2"/>
+    <text x="70" y="48" fill="#2dd4bf" font-size="9" text-anchor="middle" font-weight="600">Anthropic</text>
+    <rect x="20" y="62" width="100" height="20" rx="4" fill="#0f172a" stroke="#475569" stroke-width="1"/>
+    <text x="70" y="76" fill="#94a3b8" font-size="9" text-anchor="middle">OpenAI</text>
+    <rect x="20" y="90" width="100" height="20" rx="4" fill="#0f172a" stroke="#475569" stroke-width="1"/>
+    <text x="70" y="104" fill="#94a3b8" font-size="9" text-anchor="middle">Ollama (local)</text>
+    <path d="M70 54 L70 62" stroke="#14b8a6" stroke-width="1.3" class="ap-flow"/>
+    <path d="M70 82 L70 90" stroke="#475569" stroke-width="1.3" stroke-dasharray="3,3"/>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       CARD 3 — DATA DRIFT  (amber)   y: 472 → 626
+  ═══════════════════════════════════════════════════════════════════ -->
+  <rect x="32" y="472" width="856" height="154" rx="10" fill="#0f172a" stroke="#f59e0b" stroke-width="1.6"/>
+  <rect x="32" y="472" width="6" height="154" rx="3" fill="#f59e0b"/>
+  <circle cx="86" cy="518" r="22" fill="rgba(245,158,11,0.12)" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="86" y="525" fill="#fbbf24" font-size="20" font-weight="700" text-anchor="middle">03</text>
+  <text x="128" y="510" fill="#fbbf24" font-size="11" font-weight="700" letter-spacing="1.5">CORRECTNESS</text>
+  <text x="128" y="538" fill="#f8fafc" font-size="18" font-weight="600">Data Drift Avoidance</text>
+  <text x="128" y="568" fill="#94a3b8" font-size="13">How the planner–implementer–reviewer triplet avoids the &#8220;each step amplifies the</text>
+  <text x="128" y="592" fill="#94a3b8" font-size="13">previous step's noise&#8221; failure mode.</text>
+  <text x="128" y="614" fill="#f59e0b" font-size="11.5" font-weight="600">→ Decision: Hard structured outputs enforced at every boundary</text>
+  <!-- mini visual: planner -> impl -> reviewer with schema gates -->
+  <g transform="translate(720, 490)">
+    <rect x="0" y="0" width="140" height="118" rx="8" fill="#0a0e1a" stroke="#1e293b" stroke-width="1"/>
+    <text x="70" y="22" fill="#475569" font-size="9" text-anchor="middle" font-weight="600">SCHEMA GATES</text>
+    <rect x="22" y="32" width="96" height="18" rx="4" fill="#0f172a" stroke="#f59e0b" stroke-width="1.1"/>
+    <text x="70" y="45" fill="#fbbf24" font-size="8.5" text-anchor="middle">Planner ▸ JSON</text>
+    <rect x="22" y="58" width="96" height="18" rx="4" fill="#0f172a" stroke="#f59e0b" stroke-width="1.1"/>
+    <text x="70" y="71" fill="#fbbf24" font-size="8.5" text-anchor="middle">Impl ▸ JSON</text>
+    <rect x="22" y="84" width="96" height="18" rx="4" fill="#0f172a" stroke="#f59e0b" stroke-width="1.1"/>
+    <text x="70" y="97" fill="#fbbf24" font-size="8.5" text-anchor="middle">Review ▸ JSON</text>
+    <path d="M70 50 L70 58" stroke="#f59e0b" stroke-width="1.3" class="ap-flow"/>
+    <path d="M70 76 L70 84" stroke="#f59e0b" stroke-width="1.3" class="ap-flow"/>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       CARD 4 — PROMPT INJECTION  (red)   y: 642 → 796
+  ═══════════════════════════════════════════════════════════════════ -->
+  <rect x="32" y="642" width="856" height="154" rx="10" fill="#0f172a" stroke="#ef4444" stroke-width="1.6"/>
+  <rect x="32" y="642" width="6" height="154" rx="3" fill="#ef4444"/>
+  <circle cx="86" cy="688" r="22" fill="rgba(239,68,68,0.12)" stroke="#ef4444" stroke-width="1.5"/>
+  <text x="86" y="695" fill="#f87171" font-size="20" font-weight="700" text-anchor="middle">04</text>
+  <text x="128" y="680" fill="#f87171" font-size="11" font-weight="700" letter-spacing="1.5">SECURITY</text>
+  <text x="128" y="708" fill="#f8fafc" font-size="18" font-weight="600">Prompt-Injection Defences</text>
+  <text x="128" y="738" fill="#94a3b8" font-size="13">Treating external content (repo files, customer specs, user messages) as untrusted</text>
+  <text x="128" y="762" fill="#94a3b8" font-size="13">input by default. Tagging, isolation, and where defence-in-depth is actually required.</text>
+  <text x="128" y="784" fill="#ef4444" font-size="11.5" font-weight="600">→ Decision: Untrusted-by-default tagging + content isolation</text>
+  <!-- mini visual: shield -->
+  <g transform="translate(720, 660)">
+    <rect x="0" y="0" width="140" height="118" rx="8" fill="#0a0e1a" stroke="#1e293b" stroke-width="1"/>
+    <text x="70" y="22" fill="#475569" font-size="9" text-anchor="middle" font-weight="600">TRUST BOUNDARY</text>
+    <!-- untrusted -->
+    <rect x="18" y="34" width="48" height="64" rx="5" fill="rgba(239,68,68,0.06)" stroke="#ef4444" stroke-width="1" stroke-dasharray="3,2"/>
+    <text x="42" y="52" fill="#f87171" font-size="7.5" text-anchor="middle">UNTRUSTED</text>
+    <text x="42" y="66" fill="#64748b" font-size="7" text-anchor="middle">repo files</text>
+    <text x="42" y="78" fill="#64748b" font-size="7" text-anchor="middle">user msg</text>
+    <!-- shield gate -->
+    <path d="M88 56 L98 51 L108 56 L108 68 Q98 78 88 68 Z" fill="rgba(239,68,68,0.15)" stroke="#ef4444" stroke-width="1.3"/>
+    <!-- trusted -->
+    <rect x="74" y="86" width="48" height="20" rx="4" fill="#0f172a" stroke="#10b981" stroke-width="1"/>
+    <text x="98" y="99" fill="#4ade80" font-size="7.5" text-anchor="middle">AGENT CORE</text>
+    <path d="M66 60 L86 60" stroke="#ef4444" stroke-width="1.3" class="ap-flow"/>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       CARD 5 — COST & QUOTA  (purple)   y: 812 → 936  (124 tall, slightly shorter)
+  ═══════════════════════════════════════════════════════════════════ -->
+  <rect x="32" y="812" width="856" height="124" rx="10" fill="#0f172a" stroke="#a855f7" stroke-width="1.6"/>
+  <rect x="32" y="812" width="6" height="124" rx="3" fill="#a855f7"/>
+  <circle cx="86" cy="858" r="22" fill="rgba(168,85,247,0.12)" stroke="#a855f7" stroke-width="1.5"/>
+  <text x="86" y="865" fill="#c084fc" font-size="20" font-weight="700" text-anchor="middle">05</text>
+  <text x="128" y="848" fill="#c084fc" font-size="11" font-weight="700" letter-spacing="1.5">ECONOMICS</text>
+  <text x="128" y="876" fill="#f8fafc" font-size="18" font-weight="600">Cost &amp; Quota Architecture</text>
+  <text x="128" y="906" fill="#94a3b8" font-size="13">Where to put the SHA-256 idempotency cache, when to enforce per-user quota, and</text>
+  <text x="128" y="928" fill="#a855f7" font-size="11.5" font-weight="600">→ Decision: SHA-256 idempotency cache + per-user quota ceiling</text>
+  <!-- mini visual -->
+  <g transform="translate(720, 826)">
+    <rect x="0" y="0" width="140" height="96" rx="8" fill="#0a0e1a" stroke="#1e293b" stroke-width="1"/>
+    <text x="70" y="22" fill="#475569" font-size="9" text-anchor="middle" font-weight="600">SPEND GUARD</text>
+    <rect x="22" y="32" width="96" height="18" rx="4" fill="#0f172a" stroke="#a855f7" stroke-width="1.1"/>
+    <text x="70" y="45" fill="#c084fc" font-size="8.5" text-anchor="middle">SHA-256 cache</text>
+    <rect x="22" y="58" width="96" height="18" rx="4" fill="#0f172a" stroke="#a855f7" stroke-width="1.1"/>
+    <text x="70" y="71" fill="#c084fc" font-size="8.5" text-anchor="middle">Quota ceiling</text>
+    <path d="M70 50 L70 58" stroke="#a855f7" stroke-width="1.3" class="ap-flow"/>
+  </g>
+
+</svg>

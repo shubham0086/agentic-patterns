@@ -36,6 +36,36 @@ The problems are not unique. If you are building anything with multiple LLM agen
 
 Start with **01** if you are designing a new pipeline. Start with **02** if you are fighting API reliability. Start with **07** if your agent system is behaving unpredictably after working fine last week.
 
+## Visual Architecture
+
+**Five patterns — how they connect:**
+
+```mermaid
+graph TD
+    A[Goal arrives] --> B[01 DAG Scheduler\nTopological sort, Kahn's algorithm\nParallel execution where safe]
+    B --> C[02 LLM Router\nCircuit breaker per provider\nBedrock → OpenAI → Ollama fallback]
+    C --> D[03 Reality-First Memory\nSQLite ground truth\nDrift detection on every write]
+    D --> E[04 GraphDB Context\nCode as graph, not flat files\nSub-token navigation]
+    E --> F[05 RAG + Idempotency Cache\nSHA-256 keyed responses\nHybrid semantic + keyword search]
+    F --> G[Output: reviewable artifact]
+
+    style A fill:#1e293b,stroke:#6366f1,color:#f8fafc
+    style B fill:#1e293b,stroke:#6366f1,color:#f8fafc
+    style C fill:#1e293b,stroke:#818cf8,color:#f8fafc
+    style D fill:#1e293b,stroke:#a855f7,color:#f8fafc
+    style E fill:#1e293b,stroke:#a855f7,color:#f8fafc
+    style F fill:#1e293b,stroke:#10b981,color:#f8fafc
+    style G fill:#0f172a,stroke:#10b981,color:#10b981
+```
+
+**Architecture reference (all 5 patterns annotated):**
+
+![Five Agentic Patterns — Architecture Reference](diagrams/agentic-patterns-flowchart.svg)
+
+> Interactive animated version: [shubham0086.github.io/projects/agentic-patterns.html](https://shubham0086.github.io/projects/agentic-patterns.html)
+
+---
+
 ## Quick-Start Template
 
 Want a copy-paste scaffold before reading the docs? **[TEMPLATE.md](TEMPLATE.md)** is a complete multi-agent system template covering agent contracts, memory routing, reality files, security guardrails, observability, and recovery. Fill in the `<PLACEHOLDERS>` for your domain and you have a production-grade starting structure in under an hour.
