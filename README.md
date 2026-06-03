@@ -90,7 +90,7 @@ open visual/visual-patterns.html
 # or: python -m http.server 8080 → localhost:8080/visual/visual-patterns.html
 ```
 
-> Full portfolio case study with live animations: [shubham0086.github.io/projects/agentic-patterns.html](https://shubham0086.github.io/MyPortfolio.github.io/projects/agentic-patterns.html)
+> Full portfolio case study with live animations: [shubham0086.github.io/MyPortfolio.github.io/projects/agentic-patterns.html](https://shubham0086.github.io/MyPortfolio.github.io/projects/agentic-patterns.html)
 
 ---
 
