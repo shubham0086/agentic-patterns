@@ -47,6 +47,8 @@ When node 3 of 7 fails in a linear chain, you either fail the whole pipeline or 
 
 ## The pattern
 
+![Kahn's DAG Agent Scheduler Flowchart](../diagrams/dag-scheduler/dag-scheduler.svg)
+
 Represent agents as nodes and their dependencies as edges in a Directed Acyclic Graph. Execute using a **topological sort** — specifically Kahn's algorithm — which guarantees:
 - Nodes run only after all their dependencies complete
 - Independent nodes can run in parallel (or be scheduled optimally in serial)

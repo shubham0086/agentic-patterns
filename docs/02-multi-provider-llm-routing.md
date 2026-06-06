@@ -32,6 +32,8 @@ The obvious fix is: `try provider A, catch exception, try provider B`. This work
 
 ## The pattern
 
+![Multi-Provider LLM Router Flowchart](../diagrams/llm-router/llm-router.svg)
+
 Three components working together: **ordered model chains**, **per-provider timeouts**, and a **session-level circuit breaker**.
 
 ### 1. Ordered model chains
