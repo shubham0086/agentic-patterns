@@ -309,6 +309,16 @@ memory/reality/codebase-graph.yaml:
 
 ---
 
+## Security Invariants (Path Traversal & MCP Sandboxing)
+
+When utilizing a codebase dependency graph inside Model Context Protocol (MCP) servers or autonomous agent prompts, validate files to prevent traversal exploits:
+
+1. **Normalized Path Validation**: Before resolving nodes or dependencies, normalize all relative path inputs (e.g. using `path.resolve` or `os.path.abspath`) to remove directory traversal characters (`../`).
+2. **Workspace Allowlisting**: Compare the normalized absolute path of every queried file or dependency edge against the allowlisted workspace root sandbox. If the target resides outside this directory, block the request to mitigate sandbox escapes (e.g. CVE-2025-53110 / CVE-2025-53109).
+3. **Symlink Validation**: Resolve symbolic links before validation checks to prevent files from mapping pathways to sensitive system folders (e.g., SSH directories).
+
+---
+
 ## Building on the Foundation
 
 From here, you can:
