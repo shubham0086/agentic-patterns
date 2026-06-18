@@ -4,6 +4,8 @@
 
 Not framework docs. Not tutorials. Patterns: the recurring problems, the trade-offs, and the decisions that held up under real load.
 
+> Full portfolio case study with live animations: [my-portfolio-github-io-beta-five.vercel.app/projects/agentic-patterns.html](https://my-portfolio-github-io-beta-five.vercel.app/projects/agentic-patterns.html)
+
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-blue.svg)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
@@ -89,8 +91,6 @@ The `visual/` folder contains `visual-patterns.html` — a standalone animated c
 open visual/visual-patterns.html
 # or: python -m http.server 8080 → localhost:8080/visual/visual-patterns.html
 ```
-
-> Full portfolio case study with live animations: [my-portfolio-github-io-beta-five.vercel.app/projects/agentic-patterns.html](https://my-portfolio-github-io-beta-five.vercel.app/projects/agentic-patterns.html)
 
 ---
 
